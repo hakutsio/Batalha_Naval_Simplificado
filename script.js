@@ -1,11 +1,17 @@
-const nomeJogador = prompt("Qual seu nome, combatente?");
-
 let tamanho;
 let numNavios;
 let navios = [];
 let acertos = 0;
 let fimDeJogo = false;
 let tentativas = 0;
+let musicaIniciada = false;
+
+const nomeJogador = prompt("Qual seu nome, combatente?");
+const musicaFundo = document.getElementById('musicaFundo');
+const somAcerto = document.getElementById('somAcerto');
+const somErro = document.getElementById('somErro');
+const btnComecarJogo = document.getElementById('btnComecarJogo');
+const somVitoria = document.getElementById('somVitoria');
 
 let escolhaValida = false;
 while(!escolhaValida) {
@@ -45,22 +51,29 @@ while(!escolhaValida) {
   }
 }
 
-// Gerar tabuleiro (já implementado)
-const tabuleiro = document.getElementById("tabuleiro");
-       tabuleiro.style.gridTemplateColumns = `repeat(${tamanho}, 60px)`;
-       tabuleiro.style.gridTemplateRows = `repeat(${tamanho}, 60px)`;  
+btnComecarJogo.style.display = 'block';
+btnComecarJogo.addEventListener('click', () => {
+  musicaFundo.volume = 0.2;
+  musicaFundo.play();
 
+  btnComecarJogo.style.display = 'none';
 
-for (let y = 0; y < tamanho; y++) {
-  for (let x = 0; x < tamanho; x++) {
-    const celula = document.createElement("div");
-    celula.classList.add("celula");
-    celula.dataset.x = x;
-    celula.dataset.y = y;
-    celula.addEventListener("click", aoClicarNaCelula);
-    tabuleiro.appendChild(celula);
+  tabuleiro.style.gridTemplateColumns = `repeat(${tamanho}, 60px)`;
+  tabuleiro.style.gridTemplateRows = `repeat(${tamanho}, 60px)`;
+
+  for (let y = 0; y < tamanho; y++) {
+    for (let x = 0; x < tamanho; x++) {
+      const celula = document.createElement("div");
+      celula.classList.add("celula");
+      celula.dataset.x = x;
+      celula.dataset.y = y;
+      celula.addEventListener("click", aoClicarNaCelula);
+      tabuleiro.appendChild(celula);
+    }
   }
-}
+
+  navios = gerarNavios();
+}, { once: true});
 
 function resetarTabuleiro(){
   acertos = 0;
@@ -75,6 +88,10 @@ function resetarTabuleiro(){
 }
 
 function reinciarJogo() {
+
+  somVitoria.currentTime = 0;
+  somVitoria.play();
+
   if(tentativas < 2){
     setTimeout(() => {
       alert(`BOA, ${nomeJogador}! QUE MAAAAQUINAAA, UMA VERDADEIRA BESTAAA ENJAULADA apenas ${tentativas + acertos} jogadas!`)
@@ -138,6 +155,7 @@ navios = gerarNavios();
 // TODO: Encerrar jogo ao afundar todos os navios
 
 function aoClicarNaCelula(event) {
+
   const celula = event.currentTarget;
   const x = parseInt(celula.dataset.x);
   const y = parseInt(celula.dataset.y);
@@ -157,6 +175,9 @@ function aoClicarNaCelula(event) {
     celula.textContent = '💥';
     acertos ++;
 
+    somAcerto.currenteTime = 0;
+    somAcerto.play();
+
     if(acertos === numNavios) {
       fimDeJogo = true;
       reinciarJogo();
@@ -165,6 +186,9 @@ function aoClicarNaCelula(event) {
     console.log("Errou!");
     celula.textContent = '🌊';
     tentativas ++;
+
+    somErro.currentTime = 0;
+    somErro.play();
   }
 }
   // IMPLEMENTAR: lógica de verificação de acerto, erro, e finalização

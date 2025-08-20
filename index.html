@@ -9,7 +9,16 @@
 <body>
   <h1>Batalha Naval Simplificada</h1>
   <div id="tabuleiro"></div>
+  <button id="btnComecarJogo">INICIAR COMBATE</button>
   <p id="mensagem">Clique em uma célula para atacar.</p>
+
+  <audio id="musicaFundo" loop>
+    <source src="./assets/audios/trilha.mp3" type="audio/mpeg"/>
+  </audio>
+
+  <audio id="somAcerto" src="./assets/audios/explosion.mp3"></audio>
+  <audio id="somErro" src="./assets/audios/water-splash.mp3"></audio>
+  <audio id="somVitoria" src="./assets/audios/victory.mp3"></audio>
 
   <script src="script.js"></script>
 </body>
