@@ -7,7 +7,9 @@ Um mini-jogo de Batalha Naval feito com JavaScript puro, com foco em aprendizado
 🧠 Como funciona
 
 Escolha o nível de dificuldade:
-Fácil (5x5), Médio (10x10), ou Difícil (15x15)
+  *Fácil (5x5) 
+  *Médio (10x10)
+  *Difícil (15x15)
 
 Uma quantidade de navios é gerada aleatoriamente no tabuleiro
 Clique nas células tentando acertar todos os navios escondidos
@@ -16,9 +18,9 @@ Ao finalizar, o jogo exibe mensagens personalizadas com base no seu desempenho
 
 🛠️ Tecnologias utilizadas
 
-HTML5
-CSS3
-JavaScript (Vanilla)
+*  HTML5
+*  CSS3
+*  JavaScript
 
 📦 Como rodar localmente
 
