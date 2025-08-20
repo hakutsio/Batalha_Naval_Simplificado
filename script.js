@@ -1,16 +1,49 @@
 const nomeJogador = prompt("Qual seu nome, combatente?");
 
-           const respostaTamanho = prompt("Digite o tamanho do tabuleiro: ", "5");
-           const tamanho = parseInt(respostaTamanho);
-
-//const tamanho = 5;
-const numNavios = 3;
+let tamanho;
+let numNavios;
 let navios = [];
 let acertos = 0;
 let fimDeJogo = false;
 let tentativas = 0;
 
+let escolhaValida = false;
+while(!escolhaValida) {
+  const respostaNivel = prompt(
+    "Escolha o nivel de dificuldade:\n\n" +
+    "1 - Fácil (5x5, 3 navios)\n" +
+    "2 - Médio (10x10, 8 navios) \n" +
+    "3 - Dificil (15x15, 14 navios)"
+  );
 
+  switch(respostaNivel) {
+    case '1':
+      tamanho = 5;
+      numNavios = 3;
+      escolhaValida = true;
+      console.log("Nivel Facil escolhido");
+      break;
+    case '2':
+      tamanho = 10;
+      numNavios = 8;
+      escolhaValida = true;
+      console.log("Nivel Medio escolhido");
+      break;
+    case '3':
+      tamanho = 15;
+      numNavios = 14;
+      escolhaValida = true;
+      console.log("Nivel Dificil escolhido")
+      break;
+    default:
+      if(respostaNivel === null){
+        alert("Jogo Cancelado. até a proxima, combatente");
+        throw new Error("Jogo cancelado pelo usuario.")
+      } else {
+        alert("Opcao inválida! Pro favor, digite 1, 2 ou 3.");
+      }
+  }
+}
 
 // Gerar tabuleiro (já implementado)
 const tabuleiro = document.getElementById("tabuleiro");
